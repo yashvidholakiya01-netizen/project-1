@@ -6,12 +6,650 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+ 
 </head>
+<style>
+/* ===== BASIC RESET ===== */
+
+
+/* ===== HERO ===== */
+.hero{
+  height:70vh;
+  background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+}
+.hero-content{
+  position:relative;
+  color:#fff;
+  text-align:center;
+}
+.hero-content h1{font-size:3rem;margin-bottom:10px;}
+.hero-content p{font-size:1.1rem;margin-bottom:20px;}
+.hero-content button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff9800;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* ===== TRIPS ===== */
+.trips{padding:60px 8%;}
+.trips h2{text-align:center;font-size:2.3rem;margin-bottom:40px;}
+.trip-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.trip-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:transform .3s, box-shadow .3s;
+}
+.trip-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 35px rgba(0,0,0,0.15);
+}
+
+/* ===== IMAGE FIX (IMPORTANT) ===== */
+.trip-card img{
+  width:100%;
+  height:180px;            /* NORMAL WEBSITE SIZE */
+  object-fit:cover;        /* IMAGE PROPER FIT */
+  display:block;
+}
+
+.trip-info{padding:18px;}
+.trip-info h3{font-size:1.3rem;margin-bottom:8px;}
+.trip-info p{font-size:.95rem;margin-bottom:6px;color:#555;}
+.price{color:#ff9800;font-weight:bold;font-size:1.15rem;margin-top:8px;}
+
+.details-page{
+  display:none;
+  min-height:100vh;
+  padding:80px 8%;
+  background:linear-gradient(135deg,#f5f7fa,#e9eef5);
+  animation: pageSlide 0.6s ease;
+}
+.details-box{
+  max-width:700px;
+  background:#fff;
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+}
+.fade{animation: fadeUp 0.8s ease forwards;}
+.zoom{animation: zoomIn 0.6s ease forwards;}
+.payment-box label{display:block;margin:12px 0;font-size:1.1rem;}
+.btn-animate{
+  margin-top:25px;
+  padding:14px 32px;
+  background:#ff9800;
+  border:none;
+  color:#fff;
+  border-radius:30px;
+  cursor:pointer;
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-animate:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,0.2);}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes zoomIn{
+  from{opacity:0;transform:scale(0.8)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes pageSlide{
+  from{opacity:0;transform:translateX(40px)}
+  to{opacity:1;transform:translateX(0)}
+}
+
+  .payment-box label{
+    display:block;
+    margin:10px 0;
+    font-size:1.1rem;
+  }
+  .register-form{
+    max-width:400px;
+    margin-top:20px;
+  }
+  .register-form input{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+  }
+  .register-form button{
+    padding:12px 25px;
+    background:#ff9800;
+    border:none;
+    color:#fff;
+    border-radius:25px;
+    cursor:pointer;
+  }
+  
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      max-width: 800px;
+      padding: 20px;
+      animation: fadeIn 2s ease;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+
+    .hero-content button {
+      padding: 14px 32px;
+      font-size: 1rem;
+      background: #ff9800;
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .hero-content button:hover {
+      background: #e68900;
+      transform: scale(1.05);
+    }
+
+    /* Trip Cards */
+    .trips {
+      padding: 60px 8%;
+    }
+
+    .trips h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    .trip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .trip-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .trip-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .trip-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .trip-info {
+      padding: 20px;
+    }
+
+    .trip-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .trip-info p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff9800;
+      margin-top: 10px;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+ 
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .modal-content button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      background: #ff9800;
+      border: none;
+      color: #fff;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  
+  </style>
 <body>
-        <h1 class="rounded-md border border-gray-900 p-4 m-50 text-center text-3xl shadow-black-900">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam laboriosam veniam itaque necessitatibus
-            aspernatur voluptates inventore accusantium enim debitis tempora officiis atque vero, accusamus quas cum
-            magnam possimus ab nobis.
-        </h1>
+       <header class="text-gray-600 body-font">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+      <span class="ml-3 text-xl">orbingza</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 hover:text-gray-900" href="index.html">Home</a>
+      <a class="mr-5 hover:text-gray-900" href="service.html">Service</a>
+      <a class="mr-5 hover:text-gray-900" href="about.html">About</a>
+      <a class="mr-5 hover:text-gray-900" href="contact.html">Contact</a>
+
+     
+    </nav>
+     <a class="mr-5 hover:text-gray-900" href="a.html">
+    <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" >sign up
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </button> </a>
+  </div>
+</header>
+
+<!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Travel the World with TRAWEL</h1>
+      <p>Best trips, affordable prices & unforgettable experiences</p>
+      
+    </div>
+  </section>
+
+  <section class="text-gray-600 body-font">
+  <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+      <img class="object-cover object-center rounded" alt="hero" src="https://i0.wp.com/picjumbo.com/wp-content/uploads/calming-nature-wallpaper-free-image.jpeg?w=600&quality=80">
+    </div>
+    <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Travel far enough, you meet yourself
+        <br class="hidden lg:inline-block">Collect memories, not things
+      </h1>
+      <p class="mb-8 leading-relaxed">Life is short, and the world is wide.
+
+Travel is the only thing you buy that makes you richer.
+
+Jobs fill your pocket, adventures fill your soul.the Paris Metro is frequently called the "best show in the city"
+ because it is elevated and offers the most iconic view of the Eiffel Tower. Many travel shows (like The Travel Show
+  volume 5) feature this specific line for its visual beauty.</p>
+      
+    </div>
+  </div>
+</section>
+  <!-- Trips Section -->
+  <section class="trips">
+    <h2>Popular Trips</h2>
+
+    <div class="trip-grid">
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Goa Trip">
+        <div class="trip-info">
+          <h3>Shri lanka Trip</h3>
+          <p>🗓️ 5 Days / 4 Nights</p>
+          <p>📍 Beach fun & nightlife</p>
+          <div class="price">₹15,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1548013146-72479768bada" alt="Manali Trip">
+        <div class="trip-info">
+          <h3>Manali Trip</h3>
+          <p>🗓️ 6 Days / 5 Nights</p>
+          <p>📍 Snow & mountains</p>
+          <div class="price">₹18,500</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Dubai Trip">
+        <div class="trip-info">
+          <h3>Dubai Trip</h3>
+          <p>🗓️ 4 Days / 3 Nights</p>
+          <p>📍 Luxury & shopping</p>
+          <div class="price">₹45,000</div>
+        </div>
+      </div>
+
+        <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="Goa Trip">
+        <div class="trip-info">
+          <h3>Goa Trip</h3>
+          <p>🗓️ 5 Days / 4 Nights</p>
+          <p>📍 Beach fun & nightlife</p>
+          <div class="price">₹15,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1548013146-72479768bada" alt="Manali Trip">
+        <div class="trip-info">
+          <h3>Manali Trip</h3>
+          <p>🗓️ 6 Days / 5 Nights</p>
+          <p>📍 Snow & mountains</p>
+          <div class="price">₹18,500</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb" alt="Dubai Trip">
+        <div class="trip-info">
+          <h3>Dubai Trip</h3>
+          <p>🗓️ 4 Days / 3 Nights</p>
+          <p>📍 Luxury & shopping</p>
+          <div class="price">₹45,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff" alt="Kashmir Trip">
+        <div class="trip-info">
+          <h3>Kashmir Trip</h3>
+          <p>🗓️ 7 Days / 6 Nights</p>
+          <p>📍 Heaven on Earth</p>
+          <div class="price">₹22,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Kerala Trip">
+        <div class="trip-info">
+          <h3>Kerala Trip</h3>
+          <p>🗓️ 5 Days / 4 Nights</p>
+          <p>📍 Backwaters & nature</p>
+          <div class="price">₹19,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1518684079-0e8c3bba7c3b" alt="Rajasthan Trip">
+        <div class="trip-info">
+          <h3>Rajasthan Trip</h3>
+          <p>🗓️ 6 Days / 5 Nights</p>
+          <p>📍 Royal heritage</p>
+          <div class="price">₹20,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad" alt="Paris Trip">
+        <div class="trip-info">
+          <h3>Paris Trip</h3>
+          <p>🗓️ 5 Days / 4 Nights</p>
+          <p>📍 City of love</p>
+          <div class="price">₹65,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" alt="Singapore Trip">
+        <div class="trip-info">
+          <h3>Saputara Trip</h3>
+          <p>🗓️ 4 Days / 3 Nights</p>
+          <p>📍 Clean & modern city</p>
+          <div class="price">₹55,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" alt="Switzerland Trip">
+        <div class="trip-info">
+          <h3>Uti Trip</h3>
+          <p>🗓️ 7 Days / 6 Nights</p>
+          <p>📍 Alps & scenic views</p>
+          <div class="price">₹95,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf" alt="Thailand Trip">
+        <div class="trip-info">
+          <h3>Junagth Trip</h3>
+          <p>🗓️ 5 Days / 4 Nights</p>
+          <p>📍 Islands & nightlife</p>
+          <div class="price">₹35,000</div>
+        </div>
+      </div>
+  <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c" alt="Singapore Trip">
+        <div class="trip-info">
+          <h3>Singapore Trip</h3>
+          <p>🗓️ 4 Days / 3 Nights</p>
+          <p>📍 Clean & modern city</p>
+          <div class="price">₹55,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" alt="Switzerland Trip">
+        <div class="trip-info">
+          <h3>Switzerland Trip</h3>
+          <p>🗓️ 7 Days / 6 Nights</p>
+          <p>📍 Alps & scenic views</p>
+          <div class="price">₹95,000</div>
+        </div>
+      </div>
+
+      <div class="trip-card">
+        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf" alt="Thailand Trip">
+        <div class="trip-info">
+          <h3>Thailand Trip</h3>
+          <p>🗓️ 5 Days / 4 Nights</p>
+          <p>📍 Islands & nightlife</p>
+          <div class="price">₹35,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+<footer class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+    <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl">Tailblocks</span>
+      </a>
+      <p class="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+    </div>
+    <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+      <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+      <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+        <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+        <nav class="list-none mb-10">
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">First Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+          </li>
+          <li>
+            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+          </li>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="bg-gray-100">
+    <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+      <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
+        <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@knyttneve</a>
+      </p>
+      <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+        <a class="text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-500">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
